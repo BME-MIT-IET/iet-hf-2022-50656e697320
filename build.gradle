@@ -3,8 +3,8 @@ apply plugin: "java"
 apply plugin: "maven-publish"
 
 wrapper {
-	gradleVersion = '2.0'
-	distributionUrl = "http://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
+	gradleVersion = '7.4.2'
+	distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 }
 
 sourceSets {
