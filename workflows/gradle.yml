@@ -9,7 +9,7 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ 2-kód-átvizsgálás-statikus-analízis ]
+    branches: [ develop ]
   pull_request:
     branches: [ develop ]
 
