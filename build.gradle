@@ -57,11 +57,11 @@ dependencies {
 		exclude group: "com.google.code.findbugs"
 	}
 
-	compile "commons-beanutils:commons-beanutils:1.9.2"
-	compile "commons-codec:commons-codec:1.10"
+	implementation "commons-beanutils:commons-beanutils:1.9.2"
+	implementation "commons-codec:commons-codec:1.10"
 	
-	testCompile 'io.cucumber:cucumber-java8:7.0.0'
-    testCompile 'io.cucumber:cucumber-junit:7.0.0'
+	testImplementation 'io.cucumber:cucumber-java8:7.0.0'
+    testImplementation 'io.cucumber:cucumber-junit:7.0.0'
 
 	implementation "com.complexible.common:cp-openrdf-utils:4.0.2"
 	implementation ("com.complexible.common:cp-common-utils:5.0.1") {
