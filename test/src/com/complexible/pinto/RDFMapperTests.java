@@ -107,6 +107,8 @@ public class RDFMapperTests {
 		Model aExpected = ModelIO.read(new File(getClass().getResource("/data/primitives.nt").toURI()).toPath());
 
 		assertTrue(Models.isomorphic(aGraph, aExpected));
+		System.out.println(aMapper.toString() + "amapper");
+		System.out.println(aGraph.toString() + "aGraph");
 	}
 
 	@Test
