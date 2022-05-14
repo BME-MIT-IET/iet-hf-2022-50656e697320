@@ -43,6 +43,14 @@ repositories {
 		url "http://maven.stardog.com"
 	}
 }
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+
+
 
 dependencies {
 	compile (group: "com.google.guava", name: "guava", version: "18.0") {
@@ -51,10 +59,14 @@ dependencies {
 
 	compile "commons-beanutils:commons-beanutils:1.9.2"
 	compile "commons-codec:commons-codec:1.10"
+	
+	testCompile 'io.cucumber:cucumber-java8:7.0.0'
+    testCompile 'io.cucumber:cucumber-junit:7.0.0'
 
 	compile "com.complexible.common:cp-openrdf-utils:4.0.2"
 	compile ("com.complexible.common:cp-common-utils:5.0.1") {
 		exclude group: "org.slf4j"
+
 	}
 
 	// these should be coming from cp-openrdf-utils, but it's missing these
@@ -68,4 +80,15 @@ dependencies {
 
 tasks.withType(Test) {
 	systemProperties = System.getProperties()
+}
+
+task cucumber() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'hellocucumber', 'src/test/resources']
+        }
+    }
 }
