@@ -1,4 +1,4 @@
-Feature: ReadTest
+Feature: WriteTest
   Test if a given rdfs graph has all the necessary  readable. 
 
   Scenario: Result is correct
@@ -11,4 +11,4 @@ Feature: ReadTest
     Given graph and a result
     And result made from graph
     When I ask if Expected should equal to result
-    Then I should get "false"
+    Then III should get "false"
