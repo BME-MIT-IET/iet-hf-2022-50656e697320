@@ -24,12 +24,15 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openrdf.model.*;
+import org.openrdf.model.util.Models;
 import org.openrdf.rio.RDFFormat;
 
 import java.io.*;
 import java.util.*;
 
 import javax.lang.model.element.TypeParameterElement;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * <p></p>
@@ -60,15 +63,8 @@ public class StressTest {
 		}
 		aObj.setList(Lists.newArrayList(people));
 		Model aResult = RDFMapper.create().writeValue(aObj);
-		try{
-			BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\User\\Desktop\\fos.txt"));
-			ModelIO.write(aResult, writer, RDFFormat.NTRIPLES);
-			
-			writer.close();
-		}
-		catch (IOException e)
-		{}
 
+		assertTrue(Models.isomorphic(ModelIO.read(RDFMapperTests.Files3.classPath("/data/stresstest.nt").toPath()), aResult));
 	}
 
 	public static final class Person implements Comparable<Person>, Identifiable {
