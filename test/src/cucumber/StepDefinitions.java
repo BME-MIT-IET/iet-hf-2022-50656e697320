@@ -42,11 +42,14 @@ public class StepDefinitions {
         aExpected.setFloat(4.5f);
         aExpected.setDouble(20.22);
         aExpected.setChar('o');
+        //resultot nem kene itt beallitani?
 
     }
 
     @Then("I should get {string}")
     public void expected_should_equal_result(String expectedResult) throws AssertionError {
+       // System.out.println(expectedResult);
+        //System.out.println(result);
         assertEquals(result, Boolean.parseBoolean(expectedResult));
     }
 }

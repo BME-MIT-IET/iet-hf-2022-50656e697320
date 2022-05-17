@@ -1,14 +1,9 @@
 Feature: WriteTest
   Test if a given rdfs graph has all the necessary  readable. 
 
-  Scenario: Result is correct
-    Given graph and a result
-    And result made from graph
-    When I ask if Expected should equal to result
-    Then I should get "false"
-  
-  Scenario: Result is not correct
-    Given graph and a result
-    And result made from graph
-    When I ask if Expected should equal to result
-    Then III should get "false"
+  Scenario: Wite Primtives
+    Given An object with primitive values.
+    And  I make a result graph by wirte the object to it.
+    When I ask if the expected is equal to the result graph.
+    Then I should get "true"
+
