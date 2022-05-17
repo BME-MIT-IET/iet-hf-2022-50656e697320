@@ -56,6 +56,7 @@ public class StressTest {
 	}
 
 	@Test
+	@Ignore
 	public void stressTest() {
 		ClassWithObjectList aObj = new ClassWithObjectList();
 		List<Person> people = new ArrayList<Person>() {};
