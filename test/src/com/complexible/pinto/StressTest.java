@@ -15,6 +15,7 @@
 
 package com.complexible.pinto;
 
+import com.complexible.common.openrdf.model.ModelIO;
 import com.complexible.pinto.annotations.RdfProperty;
 import com.complexible.pinto.impl.IdentifiableImpl;
 import com.google.common.collect.Lists;
@@ -23,7 +24,12 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openrdf.model.*;
+import org.openrdf.rio.RDFFormat;
+
+import java.io.*;
 import java.util.*;
+
+import javax.lang.model.element.TypeParameterElement;
 
 /**
  * <p></p>
@@ -54,6 +60,15 @@ public class StressTest {
 		}
 		aObj.setList(Lists.newArrayList(people));
 		Model aResult = RDFMapper.create().writeValue(aObj);
+		try{
+			BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\User\\Desktop\\fos.txt"));
+			ModelIO.write(aResult, writer, RDFFormat.NTRIPLES);
+			
+			writer.close();
+		}
+		catch (IOException e)
+		{}
+
 	}
 
 	public static final class Person implements Comparable<Person>, Identifiable {
