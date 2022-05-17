@@ -56,10 +56,10 @@ public class StressTest {
 	}
 
 	@Test
-	public void stressTest() throws Exception {
+	public void stressTest() {
 		ClassWithObjectList aObj = new ClassWithObjectList();
 		List<Person> people = new ArrayList<Person>() {};
-		for (int i = 0; i < 100000; i++) {
+		for (int i = 0; i < 500000; i++) {
 			people.add(new Person("" + i));
 		}
 		aObj.setList(Lists.newArrayList(people));
