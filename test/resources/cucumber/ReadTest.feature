@@ -12,10 +12,7 @@ Feature: ReadTest
   Scenario: Read mixed
     Given I have a graph from '/data/mixed.nt'
     And I have a mapper
-    And there is a child
-      | string    | int | uri     | float | double | char |
-      | str value | 8   | urn:any | 4.5f  | 20.22  | o    |
     When I read an instance of ClassWithMixed from the graph
     Then I should get an instance of ClassWithMixed
-      | string           |
-      | class with mixed |
+      | string           | child/string | child/int | child/uri | child/float | child/double | child/char |
+      | class with mixed | str value    | 8         | urn:any   | 4.5f        | 20.22        | o          |
