@@ -153,6 +153,7 @@ public final class RDFMapper {
 		mIdFunctions = ImmutableMap.copyOf(theIdFunctions);
 
 		mDefaultNamespace = mNamespaces.get(DEFAULT_PREFIX);
+		int a =+1; //direkt hiba 
 	}
 
 	private <T> T newInstance(final Class<T> theClass) {
