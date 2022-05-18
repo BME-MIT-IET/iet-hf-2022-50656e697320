@@ -41,6 +41,21 @@ public class WriteStepDefinitions {
         aObj.id(SimpleValueFactory.getInstance().createIRI("tag:complexible:pinto:3d1c9ece37c3f9ee6068440cf9a383cc"));
     }
 
+    @Given("An object with primitive values.")
+    public void an_object_with_primitive_values_with_an_RDF_mapper() throws Exception {
+        aMapper = RDFMapper.create();
+
+        aObj = new ClassWithPrimitives();
+        aObj.setString("str value");
+        aObj.setInt(8);
+        aObj.setURI(java.net.URI.create("urn:any"));
+        aObj.setFloat(4.5f);
+        aObj.setDouble(20.22);
+        aObj.setChar('o');
+        aObj.id(SimpleValueFactory.getInstance().createIRI("tag:complexible:pinto:3d1c9ece37c3f9ee6068440cf9a383cc"));
+    }
+    
+
     @And("I make a result graph by wirte the object to it.")
     public void i_make_a_result_graph_by_wirte_the_object_to_it() {
         aGraph = aMapper.writeValue(aObj);
