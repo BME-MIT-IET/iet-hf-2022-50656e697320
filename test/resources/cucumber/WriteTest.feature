@@ -11,7 +11,7 @@ Feature: WriteTest
     Then I should get "true"
 
 
-    Scenario: Write Mixed
+  Scenario: Write Mixed
     Given An object instance of ClassWithPrimitives and an ClassWithMixed.
     | string           | child/string | child/int | child/uri | child/float | child/double | child/char |
     | class with mixed | str value    | 8         | urn:any   | 4.5f        | 20.22        | o          |
@@ -19,6 +19,3 @@ Feature: WriteTest
     When halo '/data/mixed.nt'
     Then I should get "true"
     
-
-
-
