@@ -64,7 +64,7 @@ public class WriteStepDefinitions {
     }
 
 
-    @When("halo {string}")
+    @When("I read graph from {string}")
     public void i_ask_if_the_expected_is_equal_to_the_result_read_graph_from(String url) throws RDFParseException, IOException, URISyntaxException {
             Model aExpected = ModelIO.read(new File(getClass().getResource(url).toURI()).toPath());
             result = this.aGraph.equals(aExpected);
