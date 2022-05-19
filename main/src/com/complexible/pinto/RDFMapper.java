@@ -158,7 +158,7 @@ public final class RDFMapper {
 
 	private <T> T newInstance(final Class<T> theClass) {
 		try {
-			return theClass.newInstance();
+			return theClass.getDeclaredConstructor().newInstance();
 		}
 		catch (Exception e) {
 			throw new RDFMappingException(String.format("Could not create an instance of %s, it does not have a default constructor", theClass));
@@ -782,28 +782,29 @@ public final class RDFMapper {
 
 			return mValueFactory.createLiteral(theObj.toString(), aURI);
 		}
-		else if (Boolean.class.isInstance(theObj)) {
+	
+		else if (theObj instanceof Boolean) {
 			return mValueFactory.createLiteral(Boolean.class.cast(theObj));
 		}
-		else if (Integer.class.isInstance(theObj)) {
+		else if (theObj instanceof Integer) {
 			return mValueFactory.createLiteral(Integer.class.cast(theObj).intValue());
 		}
-		else if (Long.class.isInstance(theObj)) {
+		else if (theObj instanceof Long) {
 			return mValueFactory.createLiteral(Long.class.cast(theObj).longValue());
 		}
-		else if (Short.class.isInstance(theObj)) {
+		else if (theObj instanceof Short) {
 			return mValueFactory.createLiteral(Short.class.cast(theObj).shortValue());
 		}
-		else if (Double.class.isInstance(theObj)) {
+		else if (theObj instanceof Double) {
 			return mValueFactory.createLiteral(Double.class.cast(theObj));
 		}
-		else if (Float.class.isInstance(theObj)) {
+		else if (theObj instanceof Float) {
 			return mValueFactory.createLiteral(Float.class.cast(theObj).floatValue());
 		}
-		else if (Date.class.isInstance(theObj)) {
+		else if (theObj instanceof Date) {
 			return mValueFactory.createLiteral(Dates2.datetimeISO(Date.class.cast(theObj)), XMLSchema.DATETIME);
 		}
-		else if (String.class.isInstance(theObj)) {
+		else if (theObj instanceof String) {
 			if (theAnnotation != null && !theAnnotation.language().equals("")) {
 				return mValueFactory.createLiteral(String.class.cast(theObj), theAnnotation.language());
 			}
@@ -811,12 +812,13 @@ public final class RDFMapper {
 				return mValueFactory.createLiteral(String.class.cast(theObj), XMLSchema.STRING);
 			}
 		}
-		else if (Character.class.isInstance(theObj)) {
+		else if (theObj instanceof Character) {
 			return mValueFactory.createLiteral(String.valueOf(Character.class.cast(theObj)), XMLSchema.STRING);
 		}
 		else if (java.net.URI.class.isInstance(theObj)) {
 			return mValueFactory.createLiteral(theObj.toString(), XMLSchema.ANYURI);
 		}
+
 
 		throw new RDFMappingException("Unknown or unsupported primitive type: " + theObj);
 	}
@@ -982,7 +984,8 @@ public final class RDFMapper {
 	 * @version 1.0
 	 */
 	public static class Builder {
-		private static final Pattern PREFIX_REGEX = Pattern.compile("^([a-z]|[A-Z]|_){1}(\\w|-|\\.)*$");
+		static String regex = "^([a-z]|[A-Z]|_){1}(\\w|-|\\.)*$";
+		private static final Pattern PREFIX_REGEX = Pattern.compile(regex);
 
 		private final Map<IRI, Class> mMappings = Maps.newHashMap();
 
@@ -1192,7 +1195,7 @@ public final class RDFMapper {
 			try {
 				// try creating a new instance.  this will work if they've specified a concrete type *and* it has a
 				// default constructor, which is true of all the core maps.
-				return (Map) aType.newInstance();
+				return (Map) aType.getDeclaredConstructor().newInstance();
 			}
 			catch (Exception e) {
 				LOGGER.warn("{} uses a map type, but it cannot be instantiated, using a default LinkedHashMap", theDescriptor);
@@ -1222,7 +1225,7 @@ public final class RDFMapper {
 			try {
 				// try creating a new instance.  this will work if they've specified a concrete type *and* it has a
 				// default constructor, which is true of all the core collections.
-				return (Collection) aType.newInstance();
+				return (Collection) aType.getDeclaredConstructor().newInstance();
 			}
 			catch (Exception e) {
 				if (List.class.isAssignableFrom(aType)) {
@@ -1246,6 +1249,7 @@ public final class RDFMapper {
 			}
 		}
 	}
+
 
 	// todo: move to commons-utils
 	private static final class Dates2 {
