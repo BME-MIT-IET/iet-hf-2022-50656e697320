@@ -1,71 +1,89 @@
+plugins {
+  id "org.sonarqube" version "3.3"
+}
+
+
 apply plugin: "idea"
+
 apply plugin: "java"
 apply plugin: "maven-publish"
 
+
+
 wrapper {
-	gradleVersion = '7.4.2'
-	distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
+    gradleVersion = '7.4.2'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
+}
+
+
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "BME-MIT-IET_iet-hf-2022-50656e697320"
+    property "sonar.organization", "bme-mit-iet-org"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
 }
 
 sourceSets {
-	main {
-		java {
-			srcDir 'main/src'
-		}
-		resources {
-			srcDir 'main/resources'
-		}
-	}
-	test {
-		java {
-			srcDir 'test/src'
-		}
-		resources {
-			srcDir 'test/resources'
-		}
-	}
+    main {
+        java {
+            srcDir 'main/src'
+        }
+        resources {
+            srcDir 'main/resources'
+        }
+    }
+    test {
+        java {
+            srcDir 'test/src'
+        }
+        resources {
+            srcDir 'test/resources'
+        }
+    }
 }
 
 group = "com.complexible.pinto"
 version = "2.0.1-SNAPSHOT"
 
 ext {
-	projectDescription = "Pinto: A lightweight framework for mapping Java Beans into RDF and back again"
-	projectUrl = "https://github.com/complexible/pinto"
+    projectDescription = "Pinto: A lightweight framework for mapping Java Beans into RDF and back again"
+    projectUrl = "https://github.com/complexible/pinto"
 }
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 repositories {
-	mavenCentral()
-	maven {
-		url "https://maven.stardog.com"
-	}
+    mavenCentral()
+    maven {
+        url "https://maven.stardog.com/"
+    }
 }
 
 dependencies {
-	implementation (group: "com.google.guava", name: "guava", version: "18.0") {
-		exclude group: "com.google.code.findbugs"
-	}
+    implementation (group: "com.google.guava", name: "guava", version: "18.0") {
+        exclude group: "com.google.code.findbugs"
+    }
 
-	implementation "commons-beanutils:commons-beanutils:1.9.2"
-	implementation "commons-codec:commons-codec:1.10"
+    implementation "commons-beanutils:commons-beanutils:1.9.2"
+    implementation "commons-codec:commons-codec:1.10"
 
-	implementation "com.complexible.common:cp-openrdf-utils:4.0.2"
-	implementation ("com.complexible.common:cp-common-utils:5.0.1") {
-		exclude group: "org.slf4j"
-	}
+    implementation "com.complexible.common:cp-openrdf-utils:4.0.2"
+    implementation ("com.complexible.common:cp-common-utils:5.0.1") {
+        exclude group: "org.slf4j"
+    }
 
-	// these should be coming from cp-openrdf-utils, but it's missing these
-	implementation "org.openrdf.sesame:sesame-rio-ntriples:4.0.0"
+    // these should be coming from cp-openrdf-utils, but it's missing these
+    implementation "org.openrdf.sesame:sesame-rio-ntriples:4.0.0"
 
-	implementation "org.slf4j:slf4j-api:1.7.7"
-	implementation "org.slf4j:slf4j-jdk14:1.7.7"
+    implementation "org.slf4j:slf4j-api:1.7.7"
+    implementation "org.slf4j:slf4j-jdk14:1.7.7"
 
-	testImplementation 'junit:junit:4.11'
+    testImplementation 'junit:junit:4.11'
 }
 
 tasks.withType(Test) {
-	systemProperties = System.getProperties()
+    systemProperties = System.getProperties()
 }
