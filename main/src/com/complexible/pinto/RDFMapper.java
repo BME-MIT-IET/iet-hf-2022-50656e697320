@@ -663,7 +663,7 @@ public final class RDFMapper {
 
 			return null;
 		}
-		else {
+		else if (theDescriptor!=null) {
 			Resource aResource = (Resource) theValue;
 
 			final Class aClass = pinpointClass(theGraph, aResource, theDescriptor);
@@ -675,6 +675,11 @@ public final class RDFMapper {
 			else {
 				return readValue(theGraph, aClass, aResource);
 			}
+		}
+		else 
+		{
+			LOGGER.warn("PropertyDescriptor cannot be null");
+			return null;
 		}
 	}
 
