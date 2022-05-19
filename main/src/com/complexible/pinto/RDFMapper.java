@@ -1194,7 +1194,7 @@ public final class RDFMapper {
 				// default constructor, which is true of all the core maps.
 				return (Map) aType.newInstance();
 			}
-			catch (Throwable e) {
+			catch (Exception e) {
 				LOGGER.warn("{} uses a map type, but it cannot be instantiated, using a default LinkedHashMap", theDescriptor);
 			}
 
@@ -1224,7 +1224,7 @@ public final class RDFMapper {
 				// default constructor, which is true of all the core collections.
 				return (Collection) aType.newInstance();
 			}
-			catch (Throwable e) {
+			catch (Exception e) {
 				if (List.class.isAssignableFrom(aType)) {
 					return Lists.newArrayList();
 				}
