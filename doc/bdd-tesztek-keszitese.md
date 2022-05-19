@@ -38,6 +38,8 @@ Tesztek:
     - Scenario: Write Primtives
     - Scenario: Write Mixed
 
+![](cucumber.png)
+
 
 ## 6. Build, ellenőrzés,Git adminisztráció.
 A gradle cucumber - parancs segítségével lefuttattuk a teszteket és pull requestel jeleztük a feladat elkészültét.
