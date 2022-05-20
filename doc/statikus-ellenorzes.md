@@ -13,16 +13,18 @@ A Pinto projektet a README.md és a forráskód alapján megvizsgáltuk, és a m
 Miután admin jogot kaptunk a projekthez SonarCloud segítségével beállítottunk egy CI-based gradle ellenőrzést. A SonarCloud minden lépést részletesen leírt, így könnyű dolgunk lett volna, de a Github workflow működése miatt csak sokadik próbálkozásra sikerült.
 
 ## 4. Sonar Cloud javaslatainak, code smell-jelinek átnézése.
-
+![](statikus-doc-kep1.png)
 Átnézett code smellek: isInstance cseréje, Throwable cseréje, deprecated newIntance()- cseréje.
 
-A hash algoritmus biztonságosaggra cseréje a Sonar Cloud által javasoltra, azonban ezt a változtatást nem végeztük el mert nem tartottuk szükségesnek (a Sonar Cloud szabályaiból ki lehet venni, hogy ne jelezze). 
-A RDFMapper.valueToObject() függvényben egy bug javítása, ahol NullPointerExceptions dobódhatott
+ ### A hash algoritmus biztonságosaggra cseréje a Sonar Cloud által javasoltra, azonban ezt a változtatást nem végeztük el mert nem tartottuk szükségesnek (a Sonar Cloud szabályaiból ki lehet venni, hogy ne jelezze). 
+ 
+### A RDFMapper.valueToObject() függvényben egy bug javítása, ahol NullPointerExceptions dobódhatott
 
 
 
 Aztán a “why this is an issue?” - linkre kattintva javaslatokat kaptunk a kód szépítésére, a hibák kijavítására.
 
+![](statikus-doc-kep2.png)
 
 
 
@@ -34,3 +36,4 @@ A code smell-ek a VS codeban is látszódott. Ez egyes code smell-eknek utánan�
 A változtatások után a teszteket és a build-et újra futtattuk, majd a push után, látszódott a SonarCloud felületén az eredmény (kevesebb code smell) és 0 bug.
 
 
+![](statikus-doc-kep3.png)
